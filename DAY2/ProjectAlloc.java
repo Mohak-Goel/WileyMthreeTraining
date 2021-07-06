@@ -63,37 +63,24 @@ class EmployeeSort implements Comparator{
 public class ProjectAlloc {
 
 	public static void main(String[] args) {
+		
 		List<Project> P = new ArrayList<>();
 		P.add(new Project(1, "XYZ1", 1000.0D));
 		P.add(new Project(2, "XYZ2", 2000.0D));
+		
+		Address address = new Address("Mau", "275101");
+		
 		List<Employee> E = new ArrayList<>();
+		
 		List<User> U = new ArrayList<>();
 		U.add(new User("201", "Jofra"));
 		U.add(new User("202", "Jack"));
-		U.add(new Employee("101", "Mohak Goel",
-							new Address("Mau", "275101"),
-							P.get(0),
-							500.0D));
-		U.add(new Employee("102", "Rupanshi Goel",
-				new Address("Mau", "275101"),
-				P.get(0),
-				300.0D));
-		U.add(new Employee("103", "Pankhuri Goel",
-				new Address("Mau", "275101"),
-				P.get(0),
-				600.0D));
-		U.add(new Employee("104", "Julie",
-				new Address("Mau", "275101"),
-				P.get(1),
-				500.0D));
-		U.add(new Employee("105", "Jhonny",
-						new Address("Mau", "275101"),
-						P.get(1),
-						800.0D));
-		U.add(new Employee("106", "James",
-						new Address("Mau", "275101"),
-						P.get(1),
-						900.0D));
+		U.add(new Employee("101", "Mohak Goel", address, P.get(0), 500.0D));
+		U.add(new Employee("102", "Rupanshi Goel", address, P.get(0), 300.0D));
+		U.add(new Employee("103", "Pankhuri Goel", address, P.get(0), 600.0D));
+		U.add(new Employee("104", "Julie", address, P.get(1), 500.0D));
+		U.add(new Employee("105", "Jhonny", address, P.get(1), 800.0D));
+		U.add(new Employee("106", "James", address, P.get(1), 900.0D));
 		
 		for (User u : U) {
 			if(u instanceof Employee)
