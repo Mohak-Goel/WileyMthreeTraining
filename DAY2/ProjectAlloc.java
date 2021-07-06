@@ -94,6 +94,7 @@ public class ProjectAlloc {
 						new Address("Mau", "275101"),
 						P.get(1),
 						900.0D));
+		
 		for (User u : U) {
 			if(u instanceof Employee)
 				E.add((Employee)u);
@@ -102,19 +103,22 @@ public class ProjectAlloc {
 		Collections.sort(E, new EmployeeSort());
 		
 		for (Project project : P) {
-			List<Employee> emp = new ArrayList<>();
+			
 			double budget=0.0D;
+			
+			System.out.println(project.name + " - "+ project.budget);
+			
 			for(int i=0; i<E.size(); i++) {
+				
 				if(project.equals(E.get(i).project)) {
+					
 					if(project.budget<(budget+E.get(i).salary))
 						continue;
+					
 					budget+=E.get(i).salary;
-					emp.add(E.get(i));
+					System.out.println(E.get(i).name + " - " + E.get(i).salary);
+				
 				}
-			}
-			System.out.println(project.name + " - "+ project.budget);
-			for (Employee employee : emp) {
-				System.out.println(employee.name + " - " + employee.salary);
 			}
 		}
 	}
