@@ -1,16 +1,13 @@
-//Not Implemented Lambda and Stream.
-//Not able to find out where to apply. Trying to figure it out
-
 package Bank.MiniBank.Accounts;
 
 import java.util.*;
 
 class Customer{
 	String name;
-	String accountNumber;
+	int accountNumber;
 	double balance;
 	
-	public Customer(String name, String accountNumber, double balance) {
+	public Customer(String name, int accountNumber, double balance) {
 		this.name = name;
 		this.accountNumber = accountNumber;
 		this.balance = balance;
@@ -18,7 +15,7 @@ class Customer{
 	public String getName() {
 		return name;
 	}
-	public String getAccountNumber() {
+	public int getAccountNumber() {
 		return accountNumber;
 	}
 	public double getBalance() {
@@ -36,7 +33,6 @@ class Customer{
 		System.out.println("Balance\t:\t" + balance+"\n");
 	}
 }
-
 public class MiniBank {
 
 	public static void main(String[] args) {
@@ -45,6 +41,9 @@ public class MiniBank {
 		
 		List<Customer> customer = new ArrayList<>();
 		int flag = 0;
+		
+		customer.add(new Customer("Pankhuri Goel", 102, 10000.0D));
+		customer.add(new Customer("Rupanshi Goel", 103, 10000.0D));
 		
 		while(true) {
 			
@@ -60,22 +59,39 @@ public class MiniBank {
 			switch(ch) {
 			
 			case 1: {
-				customer.add(new Customer("Mohak Goel", "101", 10000.0D));
+				customer.add(new Customer("Mohak Goel", 101, 10000.0D));
 				System.out.println("\nAccount created Successfully!\n");
 				break;
 				}
 			case 2: {
+				try{
+					customer.stream().filter(c -> 101==c.getAccountNumber()).findAny().orElse(null).debit(500);
+				}
+				catch(NullPointerException n){
+					System.out.println("Invalid Account Number!");
+				}
 				customer.get(0).debit(500.0D);
 				System.out.println("\nAmount debitted Successfully!\n");
 				break;
 				}
 			case 3: {
-				customer.get(0).credit(500.0D);
+				try{
+					customer.stream().filter(c -> 101==c.getAccountNumber()).findAny().orElse(null).credit(500);
+				}
+				catch(NullPointerException n){
+					System.out.println("Invalid Account Number!");
+				}
 				System.out.println("\nAmount credited Successfully!\n");
 				break;
 				}
 			case 4: {
-				customer.get(0).display();
+				try{
+					customer.stream().filter(c -> 101==c.getAccountNumber()).findAny().orElse(null).display();
+				}
+				catch(NullPointerException n){
+					System.out.println("Invalid Account Number!");
+				}
+				//customer.get(0).display();
 				break;
 				}
 			case 5: {
