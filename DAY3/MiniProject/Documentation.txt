@@ -1,0 +1,9 @@
+PROBLEM STATEMENT:-
+1. To build an application for a bank.
+2. Able to do two types of transactions i.e. Debit and Credit.
+3. Show details of the bank account
+4. Create a bank account.
+
+SOLUTIONS:-
+1. Use concepts of Java (Streams / Lambdas / OOPS / List Collection).
+2. Display a menu using switch case.
