@@ -1,0 +1,102 @@
+import java.util.*;
+
+class Address{
+	String city;
+	int zip;
+	public Address(String city, int zip) {
+		super();
+		this.city = city;
+		this.zip = zip;
+	}
+	public String getCity() {
+		return city;
+	}
+	public void setCity(String city) {
+		this.city = city;
+	}
+	public int getZip() {
+		return zip;
+	}
+	public void setZip(int zip) {
+		this.zip = zip;
+	}
+	
+	@Override
+	public String toString() {
+		return (" { city: '" + city + 
+				"' , zip: " + zip +
+				" }");
+	}
+}
+
+class UserLocation{
+	int id;
+	String name;
+	List<Address> address;
+	
+	public UserLocation(int id, String name, List<Address> address) {
+		this.id = id;
+		this.name = name;
+		this.address = address;
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public List<Address> getAddress() {
+		return address;
+	}
+	public void setAddress(List<Address> address) {
+		this.address = address;
+	}
+	
+	@Override
+	public String toString() {
+		return ("User{ id:" + id+","+" name: '"+name+"'}, ");
+	}
+	
+	public boolean isCityExist(String city) {
+		return address.stream().anyMatch(a->a.getCity().equals(city));
+	}
+	
+}
+
+public class AddressList {
+
+	public static void main(String[] args) {
+
+		List<Address> addressList = new ArrayList<>();
+		addressList.add(new Address("BLR", 560001));
+		addressList.add(new Address("DEL", 110001));
+		addressList.add(new Address("GN", 201305));
+		
+		List<UserLocation> usersList = new ArrayList<>();
+		usersList.add(new UserLocation(2, "User2", Arrays.asList(addressList.get(1), addressList.get(0))));
+		usersList.add(new UserLocation(1, "User1", Arrays.asList(addressList.get(2), addressList.get(0))));
+		usersList.add(new UserLocation(3, "User3", Arrays.asList(addressList.get(2), addressList.get(0))));
+		
+		System.out.print("[");
+		addressList.forEach(a->{
+			
+			List<UserLocation> temp = new ArrayList<>(usersList.stream().filter(u-> u.isCityExist(a.getCity())).toList());
+			
+			if(temp.size()>1) {
+				System.out.print(" address { city: " + a.getCity()+
+						" , zip:"+a.getZip()+
+						" ,users: [");
+				temp.stream().forEach(System.out::print);
+				System.out.println("] },");
+			}
+		});
+		System.out.println("]");
+	}
+
+}
